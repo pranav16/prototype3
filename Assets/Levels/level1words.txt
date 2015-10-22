@@ -1,0 +1,1 @@
+{"objective":"Find the prefix!","words":[{"word":"A","option":"true"},{"word":"Able","option":"false"},{"word":"Ac","option":"false"},{"word":"Anti","option":"true"},{"word":"Ant","option":"true"}]}
