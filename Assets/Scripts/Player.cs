@@ -20,20 +20,25 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             position.y += 1.0f;
+            
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             position.y -= 1.0f;
+           
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             position.x -= 1.0f;
+           
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             position.x += 1.0f;
+           
         }
         transform.position = position;
+      
     }
 
     void OnTriggerEnter2D(Collider2D other)

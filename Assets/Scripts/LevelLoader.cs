@@ -9,6 +9,7 @@ public class LevelLoader : MonoBehaviour
     public GameObject darkFloorTexture;
     public GameObject lightFloorTexture;
     public GameObject[] propsTexture;
+    public GameObject[] playerPositions;
     public GameObject playerObject;
     public GameObject wordObject;
     public GameObject objectiveObject;
@@ -66,10 +67,9 @@ public class LevelLoader : MonoBehaviour
                             floor.transform.SetParent(transform);
                             break;
                         }
-                        default:
+                    default:
                         {
-                            GameObject floor = Instantiate(lightFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
-                            floor.transform.SetParent(transform);
+                           
                             break;
                         }
                           
