@@ -5,9 +5,13 @@ public class Player : MonoBehaviour
 {
     private Vector3 previousPosition;
     // Use this for initialization
+ 
+    public float speed = 200.0f;
+    private Rigidbody2D rb2D;
     void Start()
     {
-
+        
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -19,28 +23,27 @@ public class Player : MonoBehaviour
         transform.position = position;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            position.y += 1.0f;
+            position.y += speed * Time.deltaTime;
             
+
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            position.y -= 1.0f;
+            position.y -= speed * Time.deltaTime;
            
+
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            position.x -= 1.0f;
-           
+            position.x -= speed * Time.deltaTime;
+            
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            position.x += 1.0f;
-           
+            position.x += 200.0f * Time.deltaTime;
         }
-        transform.position = position;
-      
+        transform.position = position;      
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
 
