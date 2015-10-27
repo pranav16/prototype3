@@ -1,46 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GamepadInput;
 
 public class Player : MonoBehaviour
 {
     private Vector3 previousPosition;
     // Use this for initialization
- 
-    public float speed = 200.0f;
+    [HideInInspector]
+    public GamePad.Index index;
+    public float speed = 15.0f;
     private Rigidbody2D rb2D;
     void Start()
     {
-        
+        speed = 15.0f;
         rb2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
+        GamePad.GetTrigger(GamePad.Trigger.RightTrigger, index);
+        GamepadState state = GamePad.GetState(index);
         Vector3 position = transform.position;
         previousPosition = position;
         transform.position = position;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (state.LeftStickAxis.y > 0.0f && position.y < 8.0f)
         {
             position.y += speed * Time.deltaTime;
             
 
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (state.LeftStickAxis.y < 0.0f && position.y > -8.0f)
         {
             position.y -= speed * Time.deltaTime;
            
 
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (state.LeftStickAxis.x < 0.0f && position.x > -15.0f)
         {
             position.x -= speed * Time.deltaTime;
             
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (state.LeftStickAxis.x > 0.0f && position.x < 15.0f)
         {
-            position.x += 200.0f * Time.deltaTime;
+            position.x += speed * Time.deltaTime;
         }
         transform.position = position;      
     }

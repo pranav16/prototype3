@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using GamepadInput;
 public class LevelLoader : MonoBehaviour
 {
 
@@ -10,7 +10,7 @@ public class LevelLoader : MonoBehaviour
     public GameObject lightFloorTexture;
     public GameObject[] propsTexture;
     public GameObject[] playerPositions;
-    public GameObject playerObject;
+    public GameObject[] playerObjects;
     public GameObject wordObject;
     public GameObject objectiveObject;
     private JsonData json;
@@ -53,13 +53,46 @@ public class LevelLoader : MonoBehaviour
                             }
                         case '2':
                             {
-                                GameObject player = Instantiate(playerObject, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                                GameObject player = Instantiate(playerObjects[0], positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
                                 //player.transform.SetParent(transform);
+                                Player playerScript = player.GetComponent <Player>();
+                                playerScript.index = GamePad.Index.One;
                                 GameObject floor = Instantiate(lightFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
                                 floor.transform.SetParent(transform);
                                 break;
                             }
+                
                     case '3':
+                        {
+                            GameObject player = Instantiate(playerObjects[1], positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            //player.transform.SetParent(transform);
+                            Player playerScript = player.GetComponent<Player>();
+                            playerScript.index = GamePad.Index.Two;
+                            GameObject floor = Instantiate(lightFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            floor.transform.SetParent(transform);
+                            break;
+                        }
+                    case '4':
+                        {
+                            GameObject player = Instantiate(playerObjects[2], positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            //player.transform.SetParent(transform);
+                            Player playerScript = player.GetComponent<Player>();
+                            playerScript.index = GamePad.Index.Three;
+                            GameObject floor = Instantiate(lightFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            floor.transform.SetParent(transform);
+                            break;
+                        }
+                    case '5':
+                        {
+                            GameObject player = Instantiate(playerObjects[3], positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            //player.transform.SetParent(transform);
+                            Player playerScript = player.GetComponent<Player>();
+                            playerScript.index = GamePad.Index.Four;
+                            GameObject floor = Instantiate(lightFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            floor.transform.SetParent(transform);
+                            break;
+                        }
+                    case '6':
                         {
                             Vector3 wordsLocation = positionBasedOnTileLocation(i, j);
                             positionsForWords.Add(wordsLocation);

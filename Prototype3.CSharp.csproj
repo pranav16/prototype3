@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A404B58C-EEE1-AA18-8639-86A871B473E0}</ProjectGuid>
+    <ProjectGuid>{A75F4EAC-E002-0E3D-C5A4-09861C168654}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -68,6 +68,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GamePadInput\Demo\DemoScript.cs" />
+    <Compile Include="Assets\GamePadInput\GamePad.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\JsonData.cs" />
     <Compile Include="Assets\Scripts\LevelLoader.cs" />
@@ -78,6 +80,7 @@
   <ItemGroup>
     <None Include="Assets\Levels\HomeTiltMap.txt" />
     <None Include="Assets\Levels\level1words.txt" />
+    <None Include="Assets\Sprites\drones_anim.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
