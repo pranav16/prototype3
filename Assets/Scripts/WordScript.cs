@@ -4,7 +4,9 @@ using UnityEngine.UI;
 public class WordScript : MonoBehaviour {
 
     
-    public bool isCorrect;
+    public string option;
+    public string word;
+    private int gridIndex;
 	// Use this for initialization
 	void Start () {
      
@@ -12,24 +14,44 @@ public class WordScript : MonoBehaviour {
 	
     public void setString (string msg)
     {
+        gridIndex = 0;
+        word = msg;
         GetComponent<TextMesh>().text = msg;
     }
-
-    public void setIsCorrect(bool value)
+    public string getname()
     {
-        isCorrect = value;
+        return word;
+    }
+    public void setIsOption(string value)
+    {
+        option = value;
+    }
+
+    public string getOption()
+    {
+        return option;
+    }
+    public bool hasSecondHalf(string value)
+    {
+        if (value == word)
+            return true;
+        return false;
+    }
+
+    public int getIndex()
+    {
+        return gridIndex;
+    }
+
+    public void setIndex(int index)
+    {
+        gridIndex = index;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.tag == "Player")
-        {
-            if(isCorrect)
-            Destroy(gameObject);
-            LevelLoader loader = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelLoader>();
-            loader.addWord();
-        }
+       
 
     }
     // Update is called once per frame

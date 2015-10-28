@@ -12,14 +12,16 @@ public class LevelLoader : MonoBehaviour
     public GameObject[] playerPositions;
     public GameObject[] playerObjects;
     public GameObject wordObject;
+    public List<int> ListOfFreeIndexs;
     public GameObject objectiveObject;
     private JsonData json;
-    
+    private List<string> wordsOnBoard;
     private string[] levelData;
     private float boardWidth,boardHeight;
     private GameObject jsonLevelLoader;
     private bool haveWordsBeenSpawned = false;
     private List<Vector3> positionsForWords;
+ 
 
     //private Transform board;
 
@@ -29,6 +31,8 @@ public class LevelLoader : MonoBehaviour
         levelData = tileMapText.text.Split('\n');
         boardHeight = levelData.Length;
         positionsForWords = new List<Vector3>();
+        wordsOnBoard = new List<string>();
+        ListOfFreeIndexs = new List<int>();
         for (int i = 0; i < levelData.Length; i++)
         {
             char[] line = levelData[i].ToCharArray();
@@ -47,8 +51,8 @@ public class LevelLoader : MonoBehaviour
                             }
                         case '1':
                             {
-                                GameObject floor = Instantiate(darkFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
-                                floor.transform.SetParent(transform);
+                                //GameObject floor = Instantiate(darkFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                                //floor.transform.SetParent(transform);
                                 break;
                             }
                         case '2':
@@ -96,7 +100,7 @@ public class LevelLoader : MonoBehaviour
                         {
                             Vector3 wordsLocation = positionBasedOnTileLocation(i, j);
                             positionsForWords.Add(wordsLocation);
-                            GameObject floor = Instantiate(lightFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
+                            GameObject floor = Instantiate(darkFloorTexture, positionBasedOnTileLocation(i, j), Quaternion.identity) as GameObject;
                             floor.transform.SetParent(transform);
                             break;
                         }
@@ -122,27 +126,63 @@ public class LevelLoader : MonoBehaviour
         return new Vector3(xCoordinate,yCoordinate,0.0f);
     }
 
-   public void addWord()
+    public void addToFreeIndices(int index)
     {
-        if (positionsForWords.Count <= 0 || json.isWordExhausted())
-            return;
-
-        int randomRange = Random.Range(0, positionsForWords.Count);
-        GameObject word = Instantiate(wordObject, positionsForWords[randomRange], Quaternion.identity) as GameObject;
-        WordScript script = wordObject.GetComponent<WordScript>();
-        script.setString(json.getCurrentWord());
-        if (json.getAccessibilityForWord() == "true")
-        {
-            script.setIsCorrect(true);
-        }
-        else
-        {
-            script.setIsCorrect(false);
-        }
-        positionsForWords.RemoveAt(randomRange);
-        
+        ListOfFreeIndexs.Add(index);
     }
 
+
+   public void addWord()
+    {
+        if (json.isWordExhausted())
+            return;
+        GameObject wordCrate = Instantiate(wordObject, positionsForWords[ListOfFreeIndexs[0]], Quaternion.identity) as GameObject;
+        WordScript script = wordCrate.GetComponentInChildren<WordScript>();
+        string wordfirstHalf = json.getCurrentWord();
+        string wordSecondHalf = json.getAccessibilityForWord();
+        script.setString(wordfirstHalf);
+        script.setIsOption(wordSecondHalf);
+        script.setIndex(ListOfFreeIndexs[0]);
+        wordsOnBoard.Add(wordfirstHalf);
+        wordsOnBoard.Add(wordSecondHalf);
+        ListOfFreeIndexs.RemoveAt(0);
+        GameObject option = Instantiate(wordObject, positionsForWords[ListOfFreeIndexs[0]], Quaternion.identity) as GameObject;
+       
+        WordScript optionscript = option.GetComponentInChildren<WordScript>();
+        optionscript.setString(wordSecondHalf);
+        optionscript.setIsOption(wordfirstHalf);
+        optionscript.setIndex(ListOfFreeIndexs[0]);
+        ListOfFreeIndexs.RemoveAt(0);
+
+    }
+
+
+    public void removeWordFromBoardList(string word)
+    {
+        int indexToRemove = -1;
+        for(int i = 0; i < wordsOnBoard.Count; i++)
+        {
+            if(wordsOnBoard[i] == word)
+            {
+                indexToRemove = i;
+                break;
+            }
+
+        }
+        if (indexToRemove >= 0)
+            wordsOnBoard.RemoveAt(indexToRemove);
+
+    }
+
+    public bool isWordSecondHalfPresentOnBoard(string word)
+    {
+        for (int i = 0; i < wordsOnBoard.Count; i++)
+        {
+            if (wordsOnBoard[i] == word)
+                return true;
+        }
+           return false;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -156,12 +196,14 @@ public class LevelLoader : MonoBehaviour
             GameObject objective  = Instantiate(objectiveObject, new Vector3(-2.5f,8.0f,0.0f), Quaternion.identity) as GameObject;
             WordScript scriptObjective = objective.GetComponent<WordScript>();
             scriptObjective.setString(json.getObjective());
-            int count = 0;
-            while (count < 2)
+            for(int i = 0;i < positionsForWords.Count;i++)
             {
+                ListOfFreeIndexs.Add(i);
+               
+            }
+            for (int i = 0; i < ListOfFreeIndexs.Count; i++)
                 addWord();
-                count++;
-            }    
+         
         }
  
     }
