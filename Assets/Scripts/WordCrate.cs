@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GamepadInput;
 
 public class WordCrate : MonoBehaviour {
 
@@ -11,21 +12,24 @@ public class WordCrate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 
-	}
-    void OnTriggerEnter2D(Collider2D other)
+
+    }
+    void OnTriggerStay2D(Collider2D other)
     {
-
+        
+        
         if (other.tag == "Player1")
         {
             //if (isCorrect)
             //Destroy(gameObject);
-           Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "Idle")
+            Player pl = other.GetComponent<Player>();
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "Idle" || !state.A)
                 return;
 
             pl.setState("pickup");
+           
             GameObject player = GameObject.FindGameObjectWithTag("Player1");
             pl.setWord(this.gameObject);
             this.GetComponent<BoxCollider2D>().enabled = false;
@@ -36,7 +40,8 @@ public class WordCrate : MonoBehaviour {
             //if (isCorrect)
             //Destroy(gameObject);
             Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "Idle")
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "Idle" || !state.A)
                 return;
 
             pl.setState("pickup");
@@ -49,7 +54,8 @@ public class WordCrate : MonoBehaviour {
             //if (isCorrect)
             //Destroy(gameObject);
             Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "Idle")
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "Idle" || !state.A)
                 return;
 
             pl.setState("pickup");
@@ -63,7 +69,8 @@ public class WordCrate : MonoBehaviour {
             //if (isCorrect)
             //Destroy(gameObject);
             Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "Idle")
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "Idle" || !state.A)
                 return;
 
             pl.setState("pickup");
@@ -73,4 +80,10 @@ public class WordCrate : MonoBehaviour {
         }
 
     }
+
+        void OnTriggerEnter2D(Collider2D other)
+      {
+
+       
+  }
 }

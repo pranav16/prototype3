@@ -17,21 +17,19 @@ public class PickUpPoint : MonoBehaviour {
 	
 
 	}
-
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        
         if (other.tag == "Player1")
         {
             Player pl = other.GetComponent<Player>();
-
-            if (pl.getState() != "pickup" || GamePad.GetButtonDown(GamePad.Button.A, pl.getIndex()))
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "pickup" || !state.B)
                 return;
-            WordScript script  = pl.getWord().GetComponentInChildren<WordScript>();
+            WordScript script = pl.getWord().GetComponentInChildren<WordScript>();
             LevelLoader loader = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelLoader>();
             if ((wordHalf == "" || script.hasSecondHalf(wordHalf)) && (loader.isWordSecondHalfPresentOnBoard(script.getOption()) || script.getname() == wordHalf))
             {
-               
+
                 pl.setState("Idle");
                 loader.removeWordFromBoardList(script.getname());
                 loader.addToFreeIndices(script.getIndex());
@@ -44,27 +42,28 @@ public class PickUpPoint : MonoBehaviour {
                 {
                     wordHalf = "";
                     loader.addWord();
-                } 
+                }
             }
-            
+
         }
         if (other.tag == "Player2")
         {
 
             Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "pickup" || GamePad.GetButtonDown(GamePad.Button.A, pl.getIndex()))
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "pickup" || !state.B)
                 return;
             WordScript script = pl.getWord().GetComponentInChildren<WordScript>();
             LevelLoader loader = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelLoader>();
             if ((wordHalf == "" || script.hasSecondHalf(wordHalf)) && (loader.isWordSecondHalfPresentOnBoard(script.getOption()) || script.getname() == wordHalf))
             {
-                
+
                 pl.setState("Idle");
-        
+
                 loader.removeWordFromBoardList(script.getname());
                 loader.addToFreeIndices(script.getIndex());
                 pl.destroyWord();
-              
+
                 if (wordHalf == "")
                 {
                     wordHalf = script.getOption();
@@ -75,54 +74,56 @@ public class PickUpPoint : MonoBehaviour {
                     wordHalf = "";
                 }
             }
-        
+
         }
         if (other.tag == "Player3")
         {
             Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "pickup" || GamePad.GetButtonDown(GamePad.Button.A, pl.getIndex()))
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "pickup" ||!state.B)
                 return;
             WordScript script = pl.getWord().GetComponentInChildren<WordScript>();
             LevelLoader loader = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelLoader>();
-    
-            if ((wordHalf == "" || script.hasSecondHalf(wordHalf))&& (loader.isWordSecondHalfPresentOnBoard(script.getOption()) || script.getname() == wordHalf))
+
+            if ((wordHalf == "" || script.hasSecondHalf(wordHalf)) && (loader.isWordSecondHalfPresentOnBoard(script.getOption()) || script.getname() == wordHalf))
             {
-              
+
                 pl.setState("Idle");
-             
+
                 loader.removeWordFromBoardList(script.getname());
                 loader.addToFreeIndices(script.getIndex());
                 pl.destroyWord();
                 if (wordHalf == "")
                 {
-                 
+
                     wordHalf = script.getOption();
                 }
                 else
                 {
                     loader.addWord();
-                     wordHalf = "";
+                    wordHalf = "";
                 }
 
-                
+
             }
         }
         if (other.tag == "Player4")
         {
 
             Player pl = other.GetComponent<Player>();
-            if (pl.getState() != "pickup" || GamePad.GetButtonDown(GamePad.Button.A, pl.getIndex()))
+            GamepadState state = GamePad.GetState(pl.getIndex());
+            if (pl.getState() != "pickup" || !state.B)
                 return;
             WordScript script = pl.getWord().GetComponentInChildren<WordScript>();
             LevelLoader loader = GameObject.FindGameObjectWithTag("Level").GetComponent<LevelLoader>();
             if ((wordHalf == "" || script.hasSecondHalf(wordHalf)) && (loader.isWordSecondHalfPresentOnBoard(script.getOption()) || script.getname() == wordHalf))
             {
-                
+
                 pl.setState("Idle");
                 loader.removeWordFromBoardList(script.getname());
                 loader.addToFreeIndices(script.getIndex());
                 pl.destroyWord();
-               
+
                 if (wordHalf == "")
                 {
                     wordHalf = script.getOption();
@@ -134,6 +135,11 @@ public class PickUpPoint : MonoBehaviour {
                 }
             }
         }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+       
 
     }
 

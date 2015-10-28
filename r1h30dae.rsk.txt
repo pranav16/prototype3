@@ -1,0 +1,47 @@
+﻿Current changes
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	deleted:    Library/UnityAssemblies/Mono.Cecil.xml
+#	deleted:    Library/UnityAssemblies/SyntaxTree.VisualStudio.Unity.Bridge.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.Advertisements.dll
+#	modified:   Library/UnityAssemblies/UnityEditor.Android.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.Android.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.Graphs.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.Graphs.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.LinuxStandalone.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.LinuxStandalone.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.Metro.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.Metro.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.Networking.dll
+#	modified:   Library/UnityAssemblies/UnityEditor.OSXStandalone.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.OSXStandalone.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.SamsungTV.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.SamsungTV.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.Tizen.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.Tizen.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.UI.dll
+#	modified:   Library/UnityAssemblies/UnityEditor.WP8.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.WP8.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.WebGL.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.WebGL.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.WindowsStandalone.Extensions.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.WindowsStandalone.Extensions.xml
+#	modified:   Library/UnityAssemblies/UnityEditor.iOS.Extensions.Xcode.dll
+#	deleted:    Library/UnityAssemblies/UnityEditor.iOS.Extensions.Xcode.xml
+#	deleted:    Library/UnityAssemblies/UnityEditor.iOS.Extensions.xml
+#	new file:   Library/UnityAssemblies/UnityEngine.Advertisements.dll
+#	new file:   Library/UnityAssemblies/UnityEngine.Advertisements.xml
+#	new file:   Library/UnityAssemblies/UnityEngine.Analytics.dll
+#	new file:   Library/UnityAssemblies/UnityEngine.Analytics.xml
+#	modified:   Library/UnityAssemblies/version.txt
+#	modified:   Prototype3.CSharp.csproj
+#	modified:   prototype3.CSharp.Editor.csproj
+#
+# Untracked files:
+#	Temp/
+#
+
